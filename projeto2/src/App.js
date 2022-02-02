@@ -1,19 +1,15 @@
 import './App.css';
-import { Routes, Route, setPath, BrowserRouter, Switch } from 'react-router-dom';
-import { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 //pages
-import Logon from './pages/Login';
+import Login from './pages/Login';
 import Dashboard from './pages/Dashboard'
 import ListaUnidades from './pages/Unidades/lista';
 import Cadastro from './pages/Unidades/cadastro';
 import GeracaoMensal from './pages/ConsumoMensal';
 
 export default function App() {
-  //condicao se nao estiver no login, mostra o Menu
-  const [path, setPath] = useState(window.location.pathname);
-
-
+ 
   return (
     <>
       {/* <BrowserRouter>
@@ -21,7 +17,7 @@ export default function App() {
 
 
           <Routes>
-            <Route path="/" element={<Logon  />} />
+            <Route path="/" element={<Login  />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/unidade/lista" element={<ListaUnidades  />} />
             <Route path="/unidade/cadastro" element={<Cadastro />} />

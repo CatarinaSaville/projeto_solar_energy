@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom';
-import MainContainer from '../../components/main';
-import Header from "../../components/header";
-import Content from "../../components/content";
-import Checkbox from "../../components/checkbox";
-import { Button } from "../../components/buttons/styles";
-import Input from "../../components/input/default";
-import { Form } from "./styles";
-
+import React from "react";
 import unidadesService from '../../services/unidades';
+import MainContainer from '../../components/main';
+import Content from "../../components/content";
+import Header from "../../components/header";
+import Checkbox from "../../components/checkbox";
+import Input from "../../components/input/default";
+import { Button } from "../../components/buttons/styles";
+import { Form } from "./styles"
 
 export default class Cadastro extends React.Component {
 
@@ -23,8 +21,7 @@ export default class Cadastro extends React.Component {
       modelo: '',
       local: ''
     }
-
-  }
+  };
 
   componentDidMount() {
     if (this.props?.match?.params?.id) {
@@ -70,14 +67,12 @@ export default class Cadastro extends React.Component {
       console.log(error)
       alert("Erro ao criar unidade.")
     }
-  }
-
-
+  };
   handleSubmit(event) {
     event.preventDefault();
     this.sendUnidade();
 
-  }
+  };
 
   render() {
 
@@ -133,5 +128,4 @@ export default class Cadastro extends React.Component {
     );
 
   }
-}
-
+};
