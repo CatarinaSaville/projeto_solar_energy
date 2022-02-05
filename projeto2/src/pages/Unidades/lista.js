@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import unidadesService from '../../services/unidades';
 import MainContainer from '../../components/main';
 import Content from "../../components/content";
@@ -8,60 +8,60 @@ import { Button, ButtonEdit, ButtonDelete } from "./styles";
 import { Table } from "./styles";
 
 
-export default class ListaUnidades extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            unidades: [],
-        }
-    }
+export default function ListaUnidades() {
 
-    componentDidMount() {
-        this.loadUnidades()
-    }
+    const [unidades, setUnidades] = useState([])
 
-    async loadUnidades() {
+    useEffect(() => {
+        loadUnidades()
+    }, [])
+
+    const loadUnidades = () => {
         try {
-            let res = await unidadesService.list()
-            this.setState({ unidades: res.data })
+            unidadesService.list().then((result) => {
+                console.log(result.data)
+                setUnidades(result.data)
+            })
         } catch (error) {
             console.log(error);
-            alert("Não foi possível listar as unidades.")
+            alert("Não foi possível buscar as unidades.")
+            setUnidades([])
         }
     }
 
-    deletar(unidadeId) {
+    const deletar = (unidadeId) => {
         try {
             unidadesService.delete(unidadeId)
+            loadUnidades()
         } catch (error) {
             console.log(error);
             alert("Não foi possível deletar a unidade.")
         }
     }
 
-    render() {
+    // loadUnidades()
+    return (
 
+        <MainContainer>
+            <Header>Unidades</Header>
+            <Content>
+                <div>
+                    <h2>Lista de unidades</h2>
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Apelido</th>
+                                <th>Local</th>
+                                <th>Marca</th>
+                                <th>Modelo</th>
+                                <th></th>
+                            </tr>
 
-        return (
-            <MainContainer>
-                <Header>Unidades</Header>
-                <Content>
-                    <div>
-                        <h2>Lista de unidades</h2>
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Apelido</th>
-                                    <th>Local</th>
-                                    <th>Marca</th>
-                                    <th>Modelo</th>
-                                    <th></th>
-                                </tr>
-
-                            </thead>
-                            <tbody>
-                                {this.state.unidades.map((unidade) => (
+                        </thead>
+                        <tbody>
+                            {unidades?.map((unidade) => {
+                                return (
                                     <tr>
                                         <td>{unidade.id}</td>
                                         <td>{unidade.apelido}</td>
@@ -70,28 +70,27 @@ export default class ListaUnidades extends React.Component {
                                         <td>{unidade.modelo}</td>
                                         <td>
                                             <ButtonEdit>
-                                                <Link to={"/unidade/cadastro/" + unidade.id} className='link' >Editar</Link>
+                                                <Link to={"/unidadeCadastro/" + unidade.id} >Editar</Link>
                                             </ButtonEdit>
-                                            <ButtonDelete onClick={this.deletar(unidade.id)}>
+                                            <ButtonDelete onClick={() => deletar(unidade.id)}>
+                                                Remover
                                             </ButtonDelete>
                                         </td>
                                     </tr>
-                                ))}
-                            </tbody>
+                                )
+                            })}
+                        </tbody>
 
-                        </Table>
-                    </div>
-                    <div>
-                        <Button>
-                            <Link to="/unidade/cadastro" className='link' >Nova unidade</Link>
-                        </Button>
-                    </div>
-
-
-                </Content>
-            </MainContainer>
-        )
-    }
+                    </Table>
+                </div>
+                <div>
+                    <Button>
+                        <Link to="/unidadeCadastro" >Nova unidade</Link>
+                    </Button>
+                </div>
 
 
-}
+            </Content>
+        </MainContainer>
+    )
+};

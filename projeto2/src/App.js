@@ -19,9 +19,9 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Login  />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/unidade/lista" element={<ListaUnidades  />} />
-            <Route path="/unidade/cadastro" element={<Cadastro />} />
-            <Route path="/unidade/cadastro/:id" element={<Cadastro />} />
+            <Route path="/unidadeLista" element={<ListaUnidades  />} />
+            <Route path="/unidadeCadastro" element={<Cadastro />} />
+            <Route path="/unidadeCadastro/:id" element={<Cadastro />} />
             <Route path="/consumoMensal" element={<GeracaoMensal  />} />
           </Routes>
         {/* </Switch> */}

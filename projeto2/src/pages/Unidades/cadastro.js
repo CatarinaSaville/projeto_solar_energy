@@ -1,5 +1,4 @@
-import React from "react";
-import unidadesService from '../../services/unidades';
+import React, { useState, useEffect } from "react";
 import MainContainer from '../../components/main';
 import Content from "../../components/content";
 import Header from "../../components/header";
@@ -7,125 +6,127 @@ import Checkbox from "../../components/checkbox";
 import Input from "../../components/input/default";
 import { Button } from "../../components/buttons/styles";
 import { Form } from "./styles"
+import unidadesService from "../../services/unidades";
+import { useNavigate, useParams } from 'react-router';
 
-export default class Cadastro extends React.Component {
 
-  constructor(props) {
-    super(props)
+export default function Cadastro() {
+  const cadastro = {
+    id: '',
+    ativo: '',
+    apelido: '',
+    marca: '',
+    modelo: '',
+    local: '',
+  }
+  const { id } = useParams()
+  let navigate = useNavigate();
+  const [formulario, setFormulario] = useState(cadastro);
 
-    this.state = {
-      id: null,
-      ativo: false,
-      apelido: '',
-      marca: '',
-      modelo: '',
-      local: ''
-    }
-  };
+  const evento = (e) => {
+    let nome = e.target.name;
+    let valor = e.target.value;
 
-  componentDidMount() {
-    if (this.props?.match?.params?.id) {
-      let unidadeId = this.props.match.params.id
-      this.loadUnidade(unidadeId)
-    }
+    setFormulario({ ...formulario, [nome]: valor });
   }
 
-  async loadUnidade(unidadeId) {
+
+  useEffect(() => {
+    console.log(id)
+    
+    if (id) {
+      loadUnidade(id)
+    }
+  }, [])
+
+
+  const loadUnidade = (unidadeId) => {
     try {
-      let res = await unidadesService.getOne(unidadeId)
-      let unidade = res.data.data[0]
-      this.setState(unidade)
+      unidadesService.getOne(unidadeId).then((result)=> {
+        setFormulario(result.data)
+      })
     } catch (error) {
       console.log(error);
-      alert("Não foi possível carregar as unidades.")
+      alert("Não foi possível carregar a unidade.")
     }
   }
 
-  async sendUnidade() {
-
-    let data = {
-      apelido: this.state.apelido,
-      marca: this.state.marca,
-      modelo: this.state.modelo,
-      ativo: this.state.ativo,
-      local: this.state.local,
-    }
-
+  const sendUnidade = () => {
 
     try {
-      if (this.state.id) {
-        await unidadesService.edit(data, this.state.id)
+      if (formulario.id) {
+        unidadesService.edit(formulario, formulario.id)
         alert("Unidade editada com sucesso!")
       }
       else {
-        await unidadesService.create(data)
+        unidadesService.create(formulario)
         alert("Unidade criado com sucesso!")
       }
 
       // this.props.history.push('/unidadeLista')
+      navigate('/unidadeLista')
     } catch (error) {
       console.log(error)
-      alert("Erro ao criar unidade.")
+      alert("Erro ao salvar unidade.")
     }
-  };
-  handleSubmit(event) {
-    event.preventDefault();
-    this.sendUnidade();
-
-  };
-
-  render() {
-
-    return (
-      <MainContainer>
-        <Header>Unidades</Header>
-        <Content>
-          <Form onSubmit={e => this.handleSubmit(e)}>
-            <h2>Cadastro de Unidade Geradora</h2>
-            <Input
-              type="text"
-              label="Apelido"
-              onChange={(e) => this.setState({ apelido: e.target.value })}
-              placeholder="Painel1"
-              value={this.state.apelido}
-            ></Input>
-
-            <Input
-              type="text"
-              label="Local"
-              onChange={(e) => this.setState({ local: e.target.value })}
-              placeholder="Rua Alberto, 430"
-              value={this.state.local}>
-            </Input>
-
-            <Input
-              type="text"
-              label="Marca"
-              onChange={(e) => this.setState({ marca: e.target.value })}
-              value={this.state.marca}
-              placeholder="Resun"></Input>
-
-            <Input
-              type="text"
-              label="Modelo"
-              onChange={(e) => this.setState({ modelo: e.target.value })}
-              placeholder="155w"
-              value={this.state.modelo}></Input>
-
-            <Checkbox
-              checked={this.state.ativo}
-              onChange={(e) => this.setState({ ativo: e.target.checked })}
-              label="Ativo"
-              value={this.state.ativo}
-            />
-            <br />
-            <Button type="submit">
-              Salvar
-            </Button>
-          </Form>
-        </Content>
-      </MainContainer>
-    );
-
   }
-};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    sendUnidade();
+
+  };
+
+  return (
+    <MainContainer >
+      <Header>Unidades</Header>
+      <Content>
+        <Form onSubmit={handleSubmit}>
+          <h2>Cadastro de Unidade Geradora</h2>
+
+          <Input
+            name="apelido"
+            type="text"
+            label="Apelido"
+            onChange={evento}
+            value={formulario.apelido}
+            placeholder="Painel1" />
+
+          <Input
+            name="local"
+            type="text"
+            label="Local"
+            onChange={evento}
+            value={formulario.local}
+            placeholder="Rua Alberto, 430" />
+
+          <Input
+            name="marca"
+            type="text"
+            label="Marca"
+            onChange={evento}
+            value={formulario.marca}
+            placeholder="Resun" />
+
+          <Input
+            name="modelo"
+            type="text"
+            label="Modelo"
+            onChange={evento}
+
+            value={formulario.modelo}
+            placeholder="155w" />
+
+          <Checkbox
+            name="ativo"
+            onChange={evento}
+            value={formulario.ativo}
+            label="Ativo" />
+
+          <br />
+
+          <Button type="submit">Salvar</Button>
+        </Form>
+      </Content>
+    </MainContainer>
+  );
+}

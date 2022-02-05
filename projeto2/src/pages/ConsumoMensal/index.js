@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import MainContainer from '../../components/main';
-import Header from '../../components/header';
 import Content from "../../components/content";
+import Header from '../../components/header';
 import Select from '../../components/Select';
-import { Form} from './styles';
-import { Button } from '../../components/buttons/styles';
 import Input from '../../components/input/default';
+import { Button } from '../../components/buttons/styles';
+import { Form} from './styles';
 
 export default function GeracaoMensal() {
 

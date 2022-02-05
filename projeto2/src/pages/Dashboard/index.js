@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../components/header';
 import MainContainer from '../../components/main';
 import Content from '../../components/content';
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -13,7 +14,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { Grafico, CardGrafico } from './styles';
+import { Grafico, CardGrafico, Cards, Card} from './styles';
 
 
 export default function Chart({ labels, dataPlot }) {
@@ -63,12 +64,28 @@ export default function Chart({ labels, dataPlot }) {
 
       <Header>Dashboard</Header>
       <Content>
+  
+        <Cards>
+        <Card
+        itemType='number'
+        label='Total Unidades'
+        ></Card>
+
+        <Card>Unidades Ativas </Card>
+
+        <Card>Unidades inativas</Card>
+
+        <Card>Media de energia</Card>
+        
+        </Cards>
+
         <CardGrafico>
           <h3>Total de energia gerada por mês</h3>
           <Grafico>
             <Line options={options} data={data} />
           </Grafico>
         </CardGrafico>
+
       </Content>
     </MainContainer>
   );

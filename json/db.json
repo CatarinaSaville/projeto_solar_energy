@@ -6,5 +6,22 @@
       "senha": "12345"
     }
   ],
-  "unidades": []
+  "unidades": [
+    {
+      "id": 1,
+      "ativo": "on",
+      "apelido": "Caaaaat",
+      "marca": "pra ",
+      "modelo": "testar",
+      "local": "local "
+    },
+    {
+      "id": 2,
+      "ativo": "on",
+      "apelido": "Cauuuuuuu",
+      "marca": "fldsjfkls",
+      "modelo": "ldksjfl",
+      "local": "fdsjfkldjs"
+    }
+  ]
 }
