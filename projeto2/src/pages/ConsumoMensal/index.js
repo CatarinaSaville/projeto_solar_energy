@@ -1,32 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MainContainer from '../../components/main';
 import Content from "../../components/content";
 import Header from '../../components/header';
 import Select from '../../components/Select';
 import Input from '../../components/input/default';
 import { Button } from '../../components/buttons/styles';
-import { Form} from './styles';
+import unidadesService from '../../services/unidades';
+import { Form } from './styles';
+import { useNavigate } from 'react-router';
 
 export default function GeracaoMensal() {
 
-  function handleSubmit(event) {
-    event.preventDefault();
+  const form = {
+    unidadeId: '',
+    data: '',
+    totalKw: '',
   }
 
-  const OPTIONS_UNIDADE = [
-    {
-      value: '1',
-      label: 'Unidade 1'
-    },
-    {
-      value: '2',
-      label: 'Unidade 2'
-    },
+  let navigate = useNavigate();
+  const [unidadeOptions, setOptions] = useState();
+  const [cadastro, setCadastro] = useState(form);
 
-  ];
+  const evento = (e) => {
+    let nome = e.target.name;
+    let valor = e.target.value;
 
-  const [optionUnidadeGeradora, setOptUnidadeGeradora] = useState('');
-  const [numberKw, setNumberKw] = useState('');
+    setCadastro({ ...cadastro, [nome]: valor });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    sendConsumo();
+  };
+
+  const sendConsumo = () => {
+
+    try {
+      console.log(cadastro)
+      unidadesService.addConsumo(cadastro)
+      alert("Consumo cadastrado com sucesso!")
+      navigate('/dashboard')
+    } catch (error) {
+      console.log(error)
+      alert("Erro ao salvar consumo.")
+    }
+  }
+
+  useEffect(() => {
+    loadUnidades()
+  }, [])
+
+  const loadUnidades = () => {
+    try {
+      unidadesService.list().then((result) => {
+        let unidades = result.data.map((unidade) => {
+          return { id: unidade.id, value: unidade.apelido }
+        })
+        setOptions(unidades)
+      })
+
+    } catch (error) {
+      console.log(error);
+      alert("Não foi possível buscar as unidades.")
+      setOptions([])
+    }
+  }
+
 
   return (
     <MainContainer>
@@ -34,29 +73,31 @@ export default function GeracaoMensal() {
       <Content>
         <Form onSubmit={handleSubmit}>
           <Select
+            name="unidadeId"
             label="Unidade geradora"
-            value={optionUnidadeGeradora}
-            onChange={(event) => setOptUnidadeGeradora(event.target.value)}
-            options={OPTIONS_UNIDADE}
+            options={unidadeOptions}
             description="Selecione um tipo"
-          />
+            onChange={evento}
+          ></Select>
 
-          <Input 
-          label="Mês/Ano"
-          required
-          id="date" 
-          type="month"
-          pattern="[0-9]{2}-[0-9]{4}"
-          >
+          <Input
+            name="data"
+            label="Mês/Ano"
+            required
+            id="date"
+            type="month"
+            pattern="[0-9]{2}-[0-9]{4}"
+            onChange={evento}>
           </Input>
 
           <Input
+            name="totalKw"
             label={"Total kw gerado"}
-            value={numberKw}
-            onChange={(event) => setNumberKw(event.target.value)}
-            placeholder="80"
+            type="number"
+            onChange={evento}
+            placeholder="80W"
           />
-          <br/>
+          <br />
           <Button type='submit'>
             Cadastrar
           </Button>

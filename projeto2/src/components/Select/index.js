@@ -1,19 +1,18 @@
 import React from 'react';
-import {ContainerSelect, DescriptionSelect, List} from "./styles";
+import { ContainerSelect, DescriptionSelect, List } from "./styles";
 
 function Select({ label, options, description, ...otherProps }) {
-  
+
   return (
     <ContainerSelect>
-     
+
       <DescriptionSelect>{label}</DescriptionSelect>
-      <List {...otherProps} selected="">
-        <option disabled value="">{description}</option>
-        {options.map(option => <option
-          key={option.value}
-          value={option.value}>
-          {option.label}
-        </option>
+      <List {...otherProps} defaultValue="">
+        <option  value="">{description}</option>
+        {options?.map((option) => 
+          <option value={option.id}>
+            {option.value}
+          </option>
         )}
       </List>
     </ContainerSelect>

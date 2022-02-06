@@ -4,14 +4,15 @@ export const ContainerSelect = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px  ;
-
+width: 82%;
 `;
 
 export const DescriptionSelect = styled.label`
-  
+  text-align: left;
   margin-bottom: 15px;
   color: #212529;
-`;
+  font-weight: bold;
+  `;
 
 export const List = styled.select`
   background: #FFF;

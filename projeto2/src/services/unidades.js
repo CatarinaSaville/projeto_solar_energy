@@ -13,9 +13,14 @@ const unidadesService = {
         return axios.get(enpoint)
     },
 
-    async create(data) {
-        const enpoint = apiUrl + "/unidades"
+    async addConsumo(data) {
+        const enpoint = apiUrl + "/consumos"
         return axios.post(enpoint, data)
+    },
+
+    async listConsumo() {
+        const enpoint = apiUrl + "/consumos"
+        return axios.get(enpoint)
     },
 
     async edit(data, unidadeId) {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState, useEffect} from 'react'
 import Header from '../../components/header';
 import MainContainer from '../../components/main';
 import Content from '../../components/content';
@@ -14,7 +14,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { Grafico, CardGrafico, Cards, Card} from './styles';
+import { Grafico, CardGrafico, Cards, Card } from './styles';
+import unidadesService from '../../services/unidades';
 
 
 export default function Chart({ labels, dataPlot }) {
@@ -28,6 +29,25 @@ export default function Chart({ labels, dataPlot }) {
     Legend
   );
 
+  useEffect(() => {
+    loadConsumos()
+  }, [])
+
+  const [consumos, setConsumos] = useState([])
+
+  const loadConsumos = () => {
+    try {
+      unidadesService.listConsumo().then((result) => {
+        console.log(result.data)
+        setConsumos(result.data)
+      })
+    } catch (error) {
+      console.log(error);
+      alert("Não foi possível buscar as unidades.")
+      setConsumos([])
+    }
+  }
+
   const options = {
     responsive: true,
     scales: {
@@ -37,7 +57,7 @@ export default function Chart({ labels, dataPlot }) {
         }
       },
       y: {
-        position: 'left'
+        position: 'right'
       }
     },
     plugins: {
@@ -48,13 +68,13 @@ export default function Chart({ labels, dataPlot }) {
   };
 
   const data = {
-    labels,
+    labels: consumos.map(consumo => {return consumo.data}),
     datasets: [
       {
         labels: 'Geraçao',
-        data: dataPlot,
-        borderColor: '#2196F3',
-        backgroundColor: '#2196F3',
+        data: consumos.map(consumo => {return consumo.totalKw}),
+        borderColor: '#000',
+        backgroundColor: '#000',
       },
     ],
   };
@@ -64,19 +84,19 @@ export default function Chart({ labels, dataPlot }) {
 
       <Header>Dashboard</Header>
       <Content>
-  
+
         <Cards>
-        <Card
-        itemType='number'
-        label='Total Unidades'
-        ></Card>
+          <Card
+            itemType='number'
+            label='Total Unidades'
+          ></Card>
 
-        <Card>Unidades Ativas </Card>
+          <Card>Unidades Ativas </Card>
 
-        <Card>Unidades inativas</Card>
+          <Card>Unidades inativas</Card>
 
-        <Card>Media de energia</Card>
-        
+          <Card>Media de energia</Card>
+
         </Cards>
 
         <CardGrafico>

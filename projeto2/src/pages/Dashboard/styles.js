@@ -5,11 +5,11 @@ color: black;
 `;
 
 export const config = {
-    type: 'line',
-    data: 'data',
-  };
+  type: 'line',
+  data: 'data',
+};
 
-  export const Grafico = styled.div`
+export const Grafico = styled.div`
   width: 100%;
   height: 50%;
   `;

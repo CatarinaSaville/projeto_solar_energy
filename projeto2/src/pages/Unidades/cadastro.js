@@ -97,31 +97,32 @@ export default function Cadastro() {
             label="Local"
             onChange={evento}
             value={formulario.local}
-            placeholder="Rua Alberto, 430" />
-
+            placeholder="Rua Alberto, 430" 
+            />
           <Input
             name="marca"
             type="text"
             label="Marca"
             onChange={evento}
             value={formulario.marca}
-            placeholder="Resun" />
-
-          <Input
+            placeholder="Resun" 
+            />
+            
+            <Input
             name="modelo"
             type="text"
             label="Modelo"
             onChange={evento}
-
             value={formulario.modelo}
-            placeholder="155w" />
+            placeholder="155w"
+             />
 
           <Checkbox
             name="ativo"
             onChange={evento}
             value={formulario.ativo}
-            label="Ativo" />
-
+            label="Ativo" 
+            />
           <br />
 
           <Button type="submit">Salvar</Button>

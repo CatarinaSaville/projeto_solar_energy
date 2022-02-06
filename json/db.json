@@ -8,20 +8,62 @@
   ],
   "unidades": [
     {
-      "id": 1,
-      "ativo": "on",
-      "apelido": "Caaaaat",
-      "marca": "pra ",
-      "modelo": "testar",
-      "local": "local "
+      "id": 3,
+      "ativo": "",
+      "apelido": "Painel 1",
+      "marca": "Canadian",
+      "modelo": "155w",
+      "local": "Rua 5"
     },
     {
-      "id": 2,
-      "ativo": "on",
-      "apelido": "Cauuuuuuu",
-      "marca": "fldsjfkls",
-      "modelo": "ldksjfl",
-      "local": "fdsjfkldjs"
+      "id": 4,
+      "ativo": "",
+      "apelido": "Painel 2 ",
+      "marca": "Risen",
+      "modelo": "100w",
+      "local": "Rua 15"
+    },
+    {
+      "id": 5,
+      "ativo": "",
+      "apelido": "Painel 3",
+      "marca": "Hanwha",
+      "modelo": "200w",
+      "local": "Rio de Janeiro"
+    },
+    {
+      "id": 6,
+      "ativo": "",
+      "apelido": "Painel 4",
+      "marca": "Hanwha",
+      "modelo": "100w",
+      "local": "Sao Paulo"
+    }
+  ],
+  "consumos": [
+    {
+      "unidadeId": "4",
+      "data": "2022-04",
+      "totalKw": "345",
+      "id": 1
+    },
+    {
+      "unidadeId": "6",
+      "data": "2022-08",
+      "totalKw": "1323",
+      "id": 2
+    },
+    {
+      "unidadeId": "4",
+      "data": "2022-07",
+      "totalKw": "1235",
+      "id": 3
+    },
+    {
+      "unidadeId": "5",
+      "data": "2022-08",
+      "totalKw": "315",
+      "id": 4
     }
   ]
 }
