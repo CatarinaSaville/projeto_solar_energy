@@ -7,19 +7,13 @@ border-radius: 10px;
 padding-left: 5px;
 margin: 5px;
 border-style: none;
-
-&:focus {
-  border-color: #4CBC9A;
-}
 `;
 
 export const InputTextBorder = styled.input`
 width: 80%;
 height: 32px;
 border-radius: 3px;
-
 `;
-
 
 export const LabelText = styled.label`
   font-weight: bold;
@@ -33,5 +27,4 @@ export const ContainerInput = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
   text-align: left;
-
 `;

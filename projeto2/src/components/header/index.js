@@ -1,7 +1,6 @@
 import React from 'react';
 import { HeaderDiv } from "./styles";
 
-
 export default function Header({ children }) {
 
     return (
@@ -13,4 +12,3 @@ export default function Header({ children }) {
 
     );
 }
-

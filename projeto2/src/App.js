@@ -1,7 +1,6 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 
-//pages
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard'
 import ListaUnidades from './pages/Unidades/lista';
@@ -12,10 +11,6 @@ export default function App() {
  
   return (
     <>
-      {/* <BrowserRouter>
-        <Switch> */}
-
-
           <Routes>
             <Route path="/" element={<Login  />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -24,8 +19,6 @@ export default function App() {
             <Route path="/unidadeCadastro/:id" element={<Cadastro />} />
             <Route path="/consumoMensal" element={<GeracaoMensal  />} />
           </Routes>
-        {/* </Switch> */}
-      {/* </BrowserRouter> */}
     </>
   );
 }

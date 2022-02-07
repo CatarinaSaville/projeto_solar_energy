@@ -3,7 +3,6 @@ import { ContainerInput, InputText, LabelText} from "./styles";
 
 function Input({ label, ...otherProps }){
 
-
     return(
         <ContainerInput>
             <LabelText>{label}</LabelText>

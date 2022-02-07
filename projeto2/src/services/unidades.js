@@ -2,6 +2,8 @@ import axios from 'axios';
 const apiUrl = "http://localhost:4000"
 
 const unidadesService = {
+    
+    //unidades service
 
     async list() {
         const enpoint = apiUrl + "/unidades"
@@ -13,81 +15,38 @@ const unidadesService = {
         return axios.get(enpoint)
     },
 
-    async addConsumo(data) {
-        const enpoint = apiUrl + "/consumos"
-        return axios.post(enpoint, data)
-    },
 
-    async listConsumo() {
-        const enpoint = apiUrl + "/consumos"
+    async listUnidades() {
+        const enpoint = apiUrl + "/unidades"
         return axios.get(enpoint)
     },
 
+    async addUnidade(data) {
+        const enpoint = apiUrl + "/unidades"
+        return axios.post(enpoint, data)
+    },
+    
     async edit(data, unidadeId) {
         const enpoint = apiUrl + "/unidades/" + unidadeId
         return axios.put(enpoint, data)
     },
-
+    
     async delete(unidadeId) {
         const enpoint = apiUrl + "/unidades/" + unidadeId
         return axios.delete(enpoint)
     },
+
+//consumo service
+
+    async addConsumo(data) {
+        const enpoint = apiUrl + "/consumos"
+        return axios.post(enpoint, data)
+    },
+    
+    async listConsumo() {
+        const enpoint = apiUrl + "/consumos"
+        return axios.get(enpoint)
+    },
 }
 
 export default unidadesService;
-//     },
-
-
-
-
-
-// componentDidMount() {
-//   if (this.props?.match?.params?.id) {
-//     let unidadeId = this.props.match.params.id
-//     this.loadUnidade(unidadeId)
-//   }
-// }
-
-//   async loadUnidade(unidadeId) {
-//   try {
-//     let res = await unidadesService.getOne(unidadeId)
-//     let unidade = res.data.data[0]
-//     this.setState(unidade)
-//   } catch (error) {
-//     console.log(error);
-//     alert("Não foi possível carregar as unidades.")
-//   }
-// }
-
-//   async sendUnidade() {
-
-//   let data = {
-//     apelido: this.state.apelido,
-//     marca: this.state.marca,
-//     modelo: this.state.modelo,
-//     ativo: this.state.ativo,
-//     local: this.state.local,
-//   }
-
-
-//   try {
-//     if (this.state.id) {
-//       await unidadesService.edit(data, this.state.id)
-//       alert("Unidade editada com sucesso!")
-//     }
-//     else {
-//       await unidadesService.create(data)
-//       alert("Unidade criado com sucesso!")
-//     }
-
-//     // this.props.history.push('/unidadeLista')
-//   } catch (error) {
-//     console.log(error)
-//     alert("Erro ao criar unidade.")
-//   }
-// };
-// handleSubmit(event) {
-//   event.preventDefault();
-//   this.sendUnidade();
-
-// };

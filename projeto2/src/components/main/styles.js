@@ -6,7 +6,6 @@ export const MainDiv = styled.div`
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap:wrap;
-
 `;
 
 export const MainContent = styled.main`
@@ -15,5 +14,4 @@ export const MainContent = styled.main`
     align-items: flex-start;
     justify-content: left;
     width: 80%;
-
 `;

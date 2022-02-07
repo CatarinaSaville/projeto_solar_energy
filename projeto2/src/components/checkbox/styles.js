@@ -2,8 +2,6 @@ import styled from "styled-components";
 
 export const LabelContainer = styled.label`
   width: 100%;
-  /* align-items: center; */
-  /* gap: 5px; */
   margin: 15px;
 `;
 

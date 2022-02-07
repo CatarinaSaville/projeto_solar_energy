@@ -86,15 +86,9 @@ export default function Chart({ labels, dataPlot }) {
       <Content>
 
         <Cards>
-          <Card
-            itemType='number'
-            label='Total Unidades'
-          ></Card>
-
+          <Card>Total Unidades</Card>
           <Card>Unidades Ativas </Card>
-
           <Card>Unidades inativas</Card>
-
           <Card>Media de energia</Card>
 
         </Cards>

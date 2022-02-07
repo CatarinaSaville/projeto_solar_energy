@@ -7,7 +7,6 @@ const authService = {
         const enpoint = apiUrl + "/login?email=" + email + "&senha=" + senha;
         return axios.get(enpoint)
     },
-
 }
 
 export default authService;

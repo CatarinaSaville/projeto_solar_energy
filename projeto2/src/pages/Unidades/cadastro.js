@@ -19,30 +19,29 @@ export default function Cadastro() {
     modelo: '',
     local: '',
   }
-  const { id } = useParams()
+  const { id } = useParams();
+
   let navigate = useNavigate();
+
   const [formulario, setFormulario] = useState(cadastro);
-
-  const evento = (e) => {
-    let nome = e.target.name;
-    let valor = e.target.value;
-
-    setFormulario({ ...formulario, [nome]: valor });
-  }
-
 
   useEffect(() => {
     console.log(id)
-    
+
     if (id) {
       loadUnidade(id)
     }
-  }, [])
+  }, [id])
 
+  const evento = (e) => {
+    let nome = e.target.name;
+    let valor = e.target.type == "checkbox" ? e.target.checked : e.target.value;
+    setFormulario({ ...formulario, [nome]: valor });
+  }
 
   const loadUnidade = (unidadeId) => {
     try {
-      unidadesService.getOne(unidadeId).then((result)=> {
+      unidadesService.getOne(unidadeId).then((result) => {
         setFormulario(result.data)
       })
     } catch (error) {
@@ -52,28 +51,25 @@ export default function Cadastro() {
   }
 
   const sendUnidade = () => {
-
     try {
       if (formulario.id) {
         unidadesService.edit(formulario, formulario.id)
         alert("Unidade editada com sucesso!")
       }
       else {
-        unidadesService.create(formulario)
+        unidadesService.addUnidade(formulario)
         alert("Unidade criado com sucesso!")
       }
-
-      // this.props.history.push('/unidadeLista')
       navigate('/unidadeLista')
     } catch (error) {
       console.log(error)
       alert("Erro ao salvar unidade.")
     }
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     sendUnidade();
-
   };
 
   return (
@@ -84,45 +80,45 @@ export default function Cadastro() {
           <h2>Cadastro de Unidade Geradora</h2>
 
           <Input
+            label="Apelido"
             name="apelido"
             type="text"
-            label="Apelido"
             onChange={evento}
             value={formulario.apelido}
             placeholder="Painel1" />
 
           <Input
+            label="Local"
             name="local"
             type="text"
-            label="Local"
             onChange={evento}
             value={formulario.local}
-            placeholder="Rua Alberto, 430" 
-            />
+            placeholder="Rua Alberto, 430"
+          />
           <Input
+            label="Marca"
             name="marca"
             type="text"
-            label="Marca"
             onChange={evento}
             value={formulario.marca}
-            placeholder="Resun" 
-            />
-            
-            <Input
+            placeholder="Resun"
+          />
+
+          <Input
+            label="Modelo"
             name="modelo"
             type="text"
-            label="Modelo"
             onChange={evento}
             value={formulario.modelo}
             placeholder="155w"
-             />
+          />
 
           <Checkbox
+            label="Ativo"
             name="ativo"
             onChange={evento}
             value={formulario.ativo}
-            label="Ativo" 
-            />
+          />
           <br />
 
           <Button type="submit">Salvar</Button>

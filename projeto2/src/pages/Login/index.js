@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { InputText } from "../../components/input/styles.js";
 import { Borda, LoginButton, PageLogin, LeftSideLogin, RightSideLogin, SolarLogo, FormLogin } from './styles.js'
-
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.js";
-// import validar from "./valida.js";
 
 export default function Logon() {
     const navigate = useNavigate();
@@ -77,5 +75,4 @@ export default function Logon() {
             </RightSideLogin>
         </PageLogin>
     )
-
 };

@@ -9,7 +9,7 @@
   "unidades": [
     {
       "id": 3,
-      "ativo": "",
+      "ativo": true,
       "apelido": "Painel 1",
       "marca": "Canadian",
       "modelo": "155w",
@@ -25,7 +25,7 @@
     },
     {
       "id": 5,
-      "ativo": "",
+      "ativo": true,
       "apelido": "Painel 3",
       "marca": "Hanwha",
       "modelo": "200w",
@@ -33,7 +33,7 @@
     },
     {
       "id": 6,
-      "ativo": "",
+      "ativo": true,
       "apelido": "Painel 4",
       "marca": "Hanwha",
       "modelo": "100w",
@@ -64,6 +64,12 @@
       "data": "2022-08",
       "totalKw": "315",
       "id": 4
+    },
+    {
+      "unidadeId": "4",
+      "data": "2022-04",
+      "totalKw": "555",
+      "id": 5
     }
   ]
 }

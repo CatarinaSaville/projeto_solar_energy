@@ -22,12 +22,6 @@ export const List = styled.select`
   padding-left: 5px;
   border-radius: 2px;
   
-
   option {
-    background: blue;
-  }
-
-  &:focus {
-    border-color: pink;
-  }
-`;
+    background: #F4F4F4;
+  }`;

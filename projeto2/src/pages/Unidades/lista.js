@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 import { Button, ButtonEdit, ButtonDelete } from "./styles";
 import { Table } from "./styles";
 
-
 export default function ListaUnidades() {
 
     const [unidades, setUnidades] = useState([])
@@ -39,7 +38,6 @@ export default function ListaUnidades() {
         }
     }
 
-    // loadUnidades()
     return (
 
         <MainContainer>
@@ -88,7 +86,6 @@ export default function ListaUnidades() {
                         <Link to="/unidadeCadastro" >Nova unidade</Link>
                     </Button>
                 </div>
-
 
             </Content>
         </MainContainer>
